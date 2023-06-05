@@ -1,24 +1,32 @@
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    int Q;
-    cin >> Q;
-    while (Q--) {
-        string a, b;
-        cin >> a >> b;
-        int i = 0, j = 0;
-        while (i < a.size() && j < b.size()) {
-            if (a[i] == b[j] || toupper(a[i]) == b[j]) {
-                j++;
-            }
-            i++;
+class sinhvien {
+    private :
+        string ten, lop, ns;
+        double gpa;
+    public :
+        
+        void nhap (){
+            getline (cin, this -> ten);
+            cin >> lop >> ns >> gpa;
         }
-        if (j == b.size()) {
-            cout << "YES\n";
-        } else {
-            cout << "NO\n";
+        void chuanhoa (){
+            if (this->ns[1] == '/')
+                this->ns = "0" + this->ns;
+            if (this->ns[4] == '/')
+                this ->ns.insert (3,"0");
         }
-    }
+        void in (){    
+            cout << "SV001" << " " << ten << " " << lop << " " << ns << " ";
+            cout << fixed << setprecision (1) << gpa;
+        }
+};
+
+int main (){
+    sinhvien a;
+    a.nhap();
+    a.chuanhoa();
+    a.in();
+    return 0;
 }

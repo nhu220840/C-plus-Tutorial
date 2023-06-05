@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-    int m, s; scanf("%d %d", &m, &s);
+    int m, s; cin >> m >> n;
     if(s > 9 * m || (s == 0 && m >= 2)){
         cout << "NOT FOUND";
     }
