@@ -1,11 +1,19 @@
-#include <stdio.h>
-#include <math.h>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool isPrime(int n){
+  for(int i = 2; i <= sqrt(n); i++){
+    if(n % i == 0)
+      return false;
+  }
+  return n > 1;
+}
+
 int main(){
- char c = 65;
- ++c;
- printf("%c ", c);
- char d = c + 32;
- --d;
- printf("%c", (int)d);
- return 0;
+  int n; cin >> n;
+  if(isPrime(n))
+    cout << "YES";
+  else
+    cout << "NO";
 }

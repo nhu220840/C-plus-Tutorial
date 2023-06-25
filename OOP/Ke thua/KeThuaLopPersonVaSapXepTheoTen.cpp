@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+    #include <bits/stdc++.h>
 
 using namespace std;
 
@@ -36,6 +36,20 @@ public:
     void print(){
         cout << name << " " << birth << " " << address << " "; 
     }
+
+    string getName(){
+        string res = "", word;
+        stringstream ss(name);
+        vector<string> tmp;
+        while(ss >> word){
+            tmp.push_back(word);
+        }
+        res += tmp.back();
+        for(int i = 0; i < tmp.size() - 1; i++){
+            res += tmp[i];
+        }
+        return res;
+    }
 };
 
 class Student : public Person{
@@ -56,23 +70,19 @@ public:
     }
 };
 
+bool cmp(Student a, Student b){
+    return a.getName() < b.getName();
+}
+
 int main(){
     int n; cin >> n;
     vector<Student> v;
     for(int i = 0; i < n; i++){
         cin.ignore();
-        string name, s, birth, address;
+        string name, birth, address;
         getline(cin, name);
-        getline(cin, s);
-        int idx = 0;
-        while(!isalpha(s[idx])){
-            birth += s[idx];
-            idx++;
-        }
-        while(idx < s.length()){
-            address += s[idx];
-            idx++;
-        }
+        getline(cin, birth);
+        getline(cin, address);
         string class_name;
         getline(cin, class_name);
         double gpa; cin >> gpa;
@@ -80,5 +90,6 @@ int main(){
         x.convertedInfo();
         v.push_back(x);
     }
+    stable_sort(v.begin(), v.end(), cmp);
     for(Student x : v) x.print();
 }
