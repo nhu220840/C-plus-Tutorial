@@ -29,7 +29,7 @@ public:
     }
 
     string getMajor(){
-        return class_name.substr(0, 4);
+        return class_name;
     }
 
     void print(){
@@ -55,7 +55,7 @@ int main(){
         else
             cout << "MARKETING :" << endl;
         for(Student x : a){
-            if(x.getMajor() == major)
+            if(x.getMajor().substr(0, 2) == major || x.getMajor().substr(0, 4) == major)
                 x.print();
         }
     }
