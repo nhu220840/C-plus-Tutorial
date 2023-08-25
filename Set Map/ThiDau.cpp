@@ -23,7 +23,7 @@ int main(){
         sort(it.second.begin(), it.second.end());
         for(int i = 0; i < it.second.size(); i++){
             cout << it.second[i];
-            if (i != it.second.size() - 1) {
+            if (i != it.second.size() - 1){
                 cout << ", ";
             }
         }
