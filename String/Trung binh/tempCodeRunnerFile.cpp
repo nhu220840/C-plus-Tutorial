@@ -1,0 +1,1 @@
+cout << it.second << " " << mp2.count(it.first) << endl;

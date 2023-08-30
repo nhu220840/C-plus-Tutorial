@@ -12,9 +12,9 @@ int main(){
     }
     int prefix[n + 1][m + 1];
     memset(prefix, 0, sizeof(prefix));
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++){
-            prefix[i][j] = prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1] + a[i][j];
+    for(int i = 0; i <= n; i++){
+        for(int j = 1; j <= m; j++){
+            prefix[i][j] = prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1] + a[i - 1][j - 1];
         }
     }
     int q; cin >> q;
