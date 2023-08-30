@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+using ll = long long;
 
 // case: l = 1, r = 5, k = 1
 
@@ -29,9 +30,10 @@ int main(){
         D[r + 1] -= k;
 
     }
+    
+    ll sum = 0;
     for(int i = 0; i < n; i++){
-        if(i == 0) a[i] = D[i];
-        else a[i] = D[i] + a[i - 1];
+        sum += D[i];
+        cout << sum << " ";
     }
-    for(int x : a) cout << x << " ";
 }

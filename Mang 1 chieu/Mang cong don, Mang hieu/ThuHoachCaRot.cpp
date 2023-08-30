@@ -4,9 +4,9 @@ using namespace std;
 
 int main(){
     int n, m; cin >> n >> m;
-    int a[n][m];
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++){
+    int a[n + 1][m + 1];
+    for(int i = 1; i <= n; i++){
+        for(int j = 1; j <= m; j++){
             cin >> a[i][j];
         }
     }
@@ -14,7 +14,7 @@ int main(){
     memset(prefix, 0, sizeof(prefix));
     for(int i = 0; i <= n; i++){
         for(int j = 1; j <= m; j++){
-            prefix[i][j] = prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1] + a[i - 1][j - 1];
+            prefix[i][j] = prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1] + a[i][j];
         }
     }
     int q; cin >> q;

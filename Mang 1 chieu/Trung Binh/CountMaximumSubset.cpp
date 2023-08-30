@@ -41,7 +41,7 @@ int main(){
 //         //Vi tri cuoi cung cua phan tu <= a[i] + k
 //         auto it = upper_bound(a + i + 1, a + n, a[i] + k);
 //         it--;
-//         ans = max(ans, 1ll * it - (a + i) + 1);
+//         ans = max(ans, 1ll * (it - a) - i + 1);
 //     }
 //     cout << ans << endl;
 // }
