@@ -1,51 +1,37 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include<stdio.h>
 
-using ll = long long;
+int tn(int n){
+	int dao = 0;
+	int tmp = n;
+	while (n){
+		dao = dao * 10 + n % 10;
+		n /= 10;
+	}
+	if (tmp = dao) 
+		return 1;
+	else 
+		return 0;
+}
 
-//s[i] : loi
-
-bool cmp(pair<string, int> a, pair<string, int> b){
-    if(a.second != b.second)
-        return a.second > b.second;
-    return a.first < b.first;
+int check(int n){
+	int cnt = 0, i = 0, sum = 0;
+	while(n){
+		i = n % 10;
+		sum += i;
+		if (i == 6){
+			cnt++;
+		}
+		n /= 10;
+	}
+	if (cnt >= 1 && sum == 8) return 1;
+	else return 0;
 }
 
 int main(){
-    string s;
-    map<string, int> mp;
-    while(getline(cin, s)){
-        string X = "", Y = ""; int a = 0, b = 0;
-        int idx = s.find("-");
-        string s1 = s.substr(0, idx - 1);
-        string s2 = s.substr(idx + 1);
-        stringstream ss2(s2);
-        string tmp;
-        ss2 >> tmp;
-        b = stoi(tmp);
-        while(ss2 >> tmp){
-            Y += tmp + " ";
-        }
-        Y.pop_back();
-        vector<string> v; 
-        stringstream ss1(s1);
-        while(ss1 >> tmp){
-            v.push_back(tmp);
-        }
-        a = stoi(v.back());
-        for(int i = 0; i < v.size() - 1; i++){
-            X += v[i] + " ";
-        }
-        X.pop_back();
-        //cout << X << ' ' << a << " - " << b << ' ' << Y << endl;
-        mp[X] += a; mp[Y] += b;
-    }
-    vector<pair<string, int>> v;
-    for(auto it : mp){
-        v.push_back(it);
-    }
-    sort(v.begin(), v.end(), cmp);
-    for(auto it : v){
-        cout << it.first << ' ' << it.second << endl;
-    }
+	int a, b; scanf ("%d %d", &a, &b);
+	for (int i = a; i <= b; i++){
+		if (tn(i) && check(i)){
+			printf ("%d ", i);
+		}
+	}
 }

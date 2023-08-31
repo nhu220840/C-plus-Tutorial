@@ -1,25 +1,37 @@
-#include <bits/stdc++.h>
+#include<stdio.h>
 
-using namespace std;
+int tn(int n){
+	int dao = 0;
+	int tmp = n;
+	while (n){
+		dao = dao * 10 + n % 10;
+		n /= 10;
+	}
+	if (tmp == dao) 
+		return 1;
+	else 
+		return 0;
+}
+
+int check(int n){
+	int cnt = 0, i = 0, sum = 0;
+	while(n){
+		i = n % 10;
+		sum += i;
+		if (i == 6){
+			cnt++;
+		}
+		n /= 10;
+	}
+	if (cnt >= 1 && sum % 10 == 8) return 1;
+	else return 0;
+}
 
 int main(){
-    int n, m; cin >> n >> m;
-    int a[n][m];
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++){
-            cin >> a[i][j];
-        }
-    }
-    int prefix[n + 1][m + 1];
-    memset(prefix, 0, sizeof(prefix));
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++){
-            prefix[i][j] = prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1] + a[i][j];
-        }
-    }
-    int q; cin >> q;
-    while(q--){
-        int x1, x2, y1, y2; cin >> x1 >> x2 >> y1 >> y2;
-        cout << prefix[x2][y2] - prefix[x1 - 1][y2] - prefix[x2][y1 - 1] + prefix[x1 - 1][y1 - 1] << endl;
-    }
+	int a, b; scanf ("%d %d", &a, &b);
+	for (int i = a; i <= b; i++){
+		if (tn(i) && check(i)){
+			printf ("%d ", i);
+		}
+	}
 }
