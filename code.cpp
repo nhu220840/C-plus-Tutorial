@@ -1,37 +1,39 @@
-#include<stdio.h>
+#include <bits/stdc++.h>
 
-int tn(int n){
-	int dao = 0;
-	int tmp = n;
-	while (n){
-		dao = dao * 10 + n % 10;
-		n /= 10;
-	}
-	if (tmp == dao) 
-		return 1;
-	else 
-		return 0;
-}
+using namespace std;
 
-int check(int n){
-	int cnt = 0, i = 0, sum = 0;
-	while(n){
-		i = n % 10;
-		sum += i;
-		if (i == 6){
-			cnt++;
-		}
-		n /= 10;
-	}
-	if (cnt >= 1 && sum % 10 == 8) return 1;
-	else return 0;
+int dx[4] = {-1, 0, 1, 0};
+int dy[4] = {0, -1, 0, 1};
+
+int a[1005][1005];
+int n, m;
+
+void Try(int i, int j){
+    a[i][j] = 0;
+    for(int k = 0; k < 4; k++){
+        int i1 = i + dx[k];
+        int j1 = j + dy[k];
+
+        if(i1 >= 0 && i1 < n && j1 >= 0 && j1 < m && a[i1][j1] == 1)
+            Try(i1, j1);
+    }
 }
 
 int main(){
-	int a, b; scanf ("%d %d", &a, &b);
-	for (int i = a; i <= b; i++){
-		if (tn(i) && check(i)){
-			printf ("%d ", i);
-		}
-	}
+    cin >> n >> m;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            cin >> a[i][j];
+        }
+    }
+    int cnt = 0;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            if(a[i][j] == 1){
+                cnt++;
+                Try(i, j);
+            }
+        }
+    }
+    cout << cnt;
 }
