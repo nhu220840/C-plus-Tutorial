@@ -14,9 +14,7 @@ int main(){
         mp[a[r]]++;
         while(mp.size() > k){
             mp[a[l]]--;
-            if(mp[a[l]] == 0){
-                mp.erase(a[l]);
-            }
+            if(mp[a[l]] == 0) mp.erase(a[l]);
             l++;
         }
         cnt += r - l + 1;

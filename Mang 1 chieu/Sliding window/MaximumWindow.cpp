@@ -11,18 +11,14 @@ int main(){
     //         cout << *min_element(a + i, a + i + k) << " " << *max_element(a + i, a + i + k) << endl;
     // }
 
-    int max_ele = INT_MIN;
+    multiset<int> ms;
     for(int i = 0; i < k; i++){
-        max_ele = max(max_ele, a[i]);
+        ms.insert(a[i]);
     }
-    cout << max_ele << " ";
-    for(int i = 1; i < n - k; i++){
-        if(a[i + k] > max_ele){
-            max_ele = a[i + k];
-            cout << max_ele << " ";
-        }
-        else{
-            cout << max_ele << " ";
-        }
+
+    for(int i = k; i <= n; i++){
+        cout << *ms.begin() << " " << *ms.rbegin() << endl;
+        ms.erase(ms.lower_bound(a[i - k]));
+        ms.insert(a[i]);
     }
 }

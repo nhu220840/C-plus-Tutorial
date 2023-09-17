@@ -17,6 +17,6 @@ int main(){
         }
         r++;
     }
-    if(minLength > n) cout << -1;
+    if(minLength == INT_MAX) cout << -1;
     else cout << minLength;
 }
