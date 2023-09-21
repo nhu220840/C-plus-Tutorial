@@ -2,13 +2,6 @@
 
 using namespace std;
 
-//Tu tuong:
-//B1: Khoi tao cau hinh dau tien
-//B2: while (khi chua phai cau hinh cuoi cung){
-//    <in ra cau hinh hien tai>
-//    <sinh ra cau hinh tiep theo>
-//}
-
 int n, a[100], final = 0;
 
 void ktao(){
@@ -18,14 +11,13 @@ void ktao(){
 }
 
 void sinh(){
-    //Bat dau tu bit cuoi cung, va di tim bit 0 dau tien
     int i = n; 
     while(i >= 1 && a[i] == 1){
         a[i] = 0;
         i--;
     }
     if(i == 0){
-        final = 1; //day chinh la cau hinh cuoi cung
+        final = 1; 
     }
     else{
         a[i] = 1;
@@ -37,7 +29,8 @@ int main(){
     ktao();
     while(final == 0){
         for(int i = 1; i <= n; i++){
-            cout << a[i];
+            if(a[i] == 1) cout << 'A';
+            else cout << 'B';
         }
         cout << endl;
         sinh();

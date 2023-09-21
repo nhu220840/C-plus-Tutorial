@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int n, a[100], ok;
+int n, a[100], final = 0;
 
 void ktao(){
     for(int i = 1; i <= n; i++){
@@ -17,7 +17,7 @@ void sinh(){
         i--;
     }
     if(i == 0){
-        ok = 0; //day la cau hinh cuoi cung
+        final = 1; //day la cau hinh cuoi cung
     }
     else{
         //Di tim phan tu nho nhat > a[i] trong doan tu [i + 1, n]
@@ -27,20 +27,19 @@ void sinh(){
         }
         swap(a[i], a[j]);
         //lat lai doan [i + 1, n]
-        int l = i + 1, r = n;
-        while(l < r){
-            swap(a[l], a[r]);
-            l++; r--;
-        }
-        // reverse(a + i + 1, a + n + 1);
+        // int l = i + 1, r = n;
+        // while(l < r){
+        //     swap(a[l], a[r]);
+        //     l++; r--;
+        // }
+        reverse(a + i + 1, a + n + 1);
     }
 }
 
 int main(){
     cin >> n;
     ktao();
-    ok = 1;
-    while(ok){
+    while(final == 0){
         for(int i = 1; i <= n; i++){
             cout << a[i] << " ";
         }

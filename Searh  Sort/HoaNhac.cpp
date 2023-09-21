@@ -3,12 +3,10 @@
 using namespace std;
 
 int main(){
-    int n, m;
-    cin >> n >> m;
+    int n, m; cin >> n >> m;
     multiset<int> ticket_prices;
     for(int i = 0; i < n; i++){
-        int price;
-        cin >> price;
+        int price; cin >> price;
         ticket_prices.insert(price);
     }
     for(int i = 0; i < m; i++){

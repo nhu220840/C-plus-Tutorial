@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int n, k, a[100], ok;
+int n, k, a[100], final = 0;
 
 void ktao(){
     for(int i = 1; i <= k; i++){
@@ -17,7 +17,7 @@ void sinh(){
         i--;
     }
     if(i == 0){
-        ok = 0; //day la cau hinh cuoi cung
+        final = 1; //day la cau hinh cuoi cung
     }
     else{
         a[i]++; //tang gia tri tai chi so do len
@@ -30,8 +30,7 @@ void sinh(){
 int main(){
     cin >> n >> k;
     ktao();
-    ok = 1;
-    while(ok){
+    while(final == 0){
         for(int i = 1; i <= k; i++){
             cout << a[i] << " ";
         }

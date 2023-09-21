@@ -11,7 +11,7 @@ int main(){
     }
     sort(v.begin(), v.end());
     for(int i = 0; i < v.size(); i++){
-        if(s >= v[i].first){
+        if(s > v[i].first){
             s += v[i].second;
         }
         else{
