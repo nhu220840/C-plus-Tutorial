@@ -3,40 +3,43 @@
 using namespace std;
 using ll = long long;
 
-int n, k, a[100], final = 0;
+int n, a[1000], X[1000];
+vector<vector<int>> res;
 
-void ktao(){
-    for(int i = 1; i <= k; i++){
-        a[i] = i;
+void enter(){
+    cin >> n;
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
     }
 }
 
-void sinh(){
-    int i = k;
-    while(i >= 1 && a[i] == n - k + i){
-        --i;
-    }
-    if(i == 0){
-        final = 1;
-    }
-    else{
-        a[i]++;
-        for(int j = i + 1; j <= k; j++){
-            a[j] = a[j - 1] + 1;
+void Try(int i, int left, int right, int sum){
+    for(int j = left; j <= right; j++){
+        X[i] = a[j];
+        sum += a[j];
+        if(sum % 2 == 1){
+            vector<int> tmp(X + 1, X + i + 1); 
+            res.push_back(tmp);
         }
+        Try(i + 1, j + 1, n - 1, sum);
+        sum -= a[j];
     }
 }
+
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    cin >> n >> k;
-    ktao();
-    while(final == 0){
-        for(int i = 1; i <= k; i++){
-            cout << a[i] << " ";
+    enter();
+    Try(1, 0, n - 1, 0);
+    if(res.empty()) cout << "NOT FOUND";
+    else{
+        sort(res.begin(), res.end());
+        for(auto it : res){
+            for(int x : it){
+                cout << x << " ";
+            }
+            cout << endl;
         }
-        cout << endl;
-        sinh();
     }
 }

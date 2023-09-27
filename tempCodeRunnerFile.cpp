@@ -1,37 +1,13 @@
-#include<stdio.h>
-
-int tn(int n){
-	int dao = 0;
-	int tmp = n;
-	while (n){
-		dao = dao * 10 + n % 10;
-		n /= 10;
-	}
-	if (tmp = dao) 
-		return 1;
-	else 
-		return 0;
-}
-
-int check(int n){
-	int cnt = 0, i = 0, sum = 0;
-	while(n){
-		i = n % 10;
-		sum += i;
-		if (i == 6){
-			cnt++;
+void Try(int i, int left, int right, int sum){
+	for(int j = left; j <= right; j++){
+		X[i] = a[j];
+		sum += a[j];
+		if(sum == s){
+			vector<int> tmp(X + 1, X + i + 1); // 1 => i : X
+			res.push_back(tmp);
 		}
-		n /= 10;
-	}
-	if (cnt >= 1 && sum == 8) return 1;
-	else return 0;
-}
-
-int main(){
-	int a, b; scanf ("%d %d", &a, &b);
-	for (int i = a; i <= b; i++){
-		if (tn(i) && check(i)){
-			printf ("%d ", i);
-		}
+		else if(sum < s) 
+			Try(i + 1, j, n - 1, sum);
+		sum -= a[j];
 	}
 }

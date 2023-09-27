@@ -4,13 +4,13 @@ using namespace std;
 
 int n, a[100], final = 0;
 
-void ktao(){
+void initialize(){
     for(int i = 1; i <= n; i++){
         a[i] = 0;
     }
 }
 
-void sinh(){
+void nextGeneration(){
     int i = n; 
     while(i >= 1 && a[i] == 1){
         a[i] = 0;
@@ -26,13 +26,13 @@ void sinh(){
 
 int main(){
     cin >> n;
-    ktao();
+    initialize();
     while(final == 0){
         for(int i = 1; i <= n; i++){
             if(a[i] == 1) cout << 'A';
             else cout << 'B';
         }
         cout << endl;
-        sinh();
+        nextGeneration();
     }
 }

@@ -3,24 +3,26 @@
 using namespace std;
 using ll = long long;
 
-int n, k, a[1001];
+int n, a[1001];
 
 void nextGeneration(){
-    int i = k;
-    while(i >= 1 && a[i] == n - k + i){
+    int i = n - 1;
+    while(i >= 1 && a[i] > a[i + 1]){
         i--;
     }
     if(i == 0){
-        for(int i = 1; i <= k; i++){
+        for(int i = 1; i <= n; i++){
             cout << i << " ";
         }
     }
     else{
-        a[i]++;
-        for(int j = i + 1; j <= k; j++){
-            a[j] = a[j - 1] + 1;
+        int j = n;
+        while(a[i] > a[j]){
+            j--;
         }
-        for(int i = 1; i <= k; i++){
+        swap(a[i], a[j]);
+        reverse(a + i + 1, a + n + 1);
+        for(int i = 1; i <= n; i++){
             cout << a[i] << " ";
         }
     }
@@ -29,7 +31,7 @@ void nextGeneration(){
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    cin >> n >> k;
-    for(int i = 1; i <= k; i++) cin >> a[i];
+    cin >> n;
+    for(int i = 1; i <= n; i++) cin >> a[i];
     nextGeneration();
 }
