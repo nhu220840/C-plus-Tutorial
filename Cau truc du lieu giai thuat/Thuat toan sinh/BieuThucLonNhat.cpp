@@ -3,16 +3,16 @@
 using namespace std;
 using ll = long long;
 
-int n, a[1000], w[1000], final = 0;
+int num[5], a[100], final = 0;
 
 void initialize(){
-    for(int i = 1; i <= n; i++){
+    for(int i = 1; i <= 4; i++){
         a[i] = 0;
     }
 }
 
 void nextGen(){
-    int i = n;
+    int i = 4;
     while(i >= 1 && a[i] == 1){
         a[i] = 0;
         i--;
@@ -27,21 +27,20 @@ void nextGen(){
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    cin >> n;
-    for(int i = 1; i <= n; i++) cin >> w[i];
-    ll ans = INT_MAX;
+    ll ans = INT_MIN;
     initialize();
+    for(int i = 1; i <= 4; i++){
+        cin >> num[i];
+    }
     while(!final){
-        ll s1 = 0, s2 = 0;
-        for(int i = 1; i <= n; i++){
-            if(a[i] == 0){
-                s1 += w[i];
-            }
-            else{
-                s2 += w[i];
-            }
+        ll sum = num[1];
+        for(int i = 2; i <= 4; i++){
+            if(a[i] == 1)
+                sum += num[i];
+            else
+                sum -= num[i];
         }
-        ans = min(ans, abs(s1 - s2));
+        ans = max(ans, sum);
         nextGen();
     }
     cout << ans;
