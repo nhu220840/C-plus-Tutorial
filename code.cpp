@@ -1,45 +1,74 @@
 #include <bits/stdc++.h>
-
 using namespace std;
-using ll = long long;
 
-int n, a[1000], X[1000];
-vector<vector<int>> res;
+int X[14][14];
+int visited[14][14];
+string Duongdi;
+vector<string> v;
+int dx[4] = {0, 1, 0, -1};
+int dy[4] = {1, 0, -1, 0};
 
-void enter(){
-    cin >> n;
-    for(int i = 0; i < n; i++){
-        cin >> a[i];
-    }
-}
-
-void Try(int i, int left, int right, int sum){
-    for(int j = left; j <= right; j++){
-        X[i] = a[j];
-        sum += a[j];
-        if(sum % 2 == 1){
-            vector<int> tmp(X + 1, X + i + 1); 
-            res.push_back(tmp);
-        }
-        Try(i + 1, j + 1, n - 1, sum);
-        sum -= a[j];
-    }
-}
-
-
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    enter();
-    Try(1, 0, n - 1, 0);
-    if(res.empty()) cout << "NOT FOUND";
-    else{
-        sort(res.begin(), res.end());
-        for(auto it : res){
-            for(int x : it){
-                cout << x << " ";
+void BackTrack(int i, int j, int n)
+{
+    visited[i][j] = 1;
+    for (int k = 0; k < 4; k++)
+    {
+        int i1 = i + dx[k];
+        int j1 = j + dy[k];
+        if (!visited[i1][j1] && X[i1][j1] == 1 && i1 <= n && j1 <= n)
+        {
+            if (k == 0)
+            {
+                Duongdi.push_back('R');
             }
-            cout << endl;
+            else if (k == 1)
+            {
+                Duongdi.push_back('D');
+            }
+            else if (k == 2)
+            {
+                Duongdi.push_back('L');
+            }
+            else
+            {
+                Duongdi.push_back('U');
+            }
+            if (i1 == n && j1 == n)
+            {
+                v.push_back(Duongdi);
+            }
+            else
+            {
+                BackTrack(i1, j1, n);
+            }
+            Duongdi.pop_back();
+            visited[i1][j1] = 0;
+        }
+    }
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            cin >> X[i][j];
+        }
+    }
+    BackTrack(1, 1, n);
+    if (v.empty())
+    {
+        cout << "-1";
+    }
+    else
+    {
+        sort(v.begin(), v.end());
+        for (auto x : v)
+        {
+            cout << x << "\n";
         }
     }
 }

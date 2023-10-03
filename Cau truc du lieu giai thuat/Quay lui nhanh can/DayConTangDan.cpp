@@ -39,6 +39,13 @@ void Try(vector<int> tmp, int left, int right){
     }
 }
 
+bool cmp(vector<int> a, vector<int> b){
+    string x = "", y = "";
+    for(auto it : a) x += to_string(it);
+    for(auto it : b) y += to_string(it);
+    return x < y;
+}
+
 
 int main(){
     ios::sync_with_stdio(false);
@@ -46,7 +53,7 @@ int main(){
     enter();
     vector<int> x;
     Try(x, 0, n - 1);
-    sort(res.begin(), res.end());
+    sort(res.begin(), res.end(), cmp);
     for(auto it : res){
         for(int x : it){
             cout << x << " ";
