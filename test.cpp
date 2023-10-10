@@ -1,73 +1,40 @@
 #include <bits/stdc++.h>
-
 using namespace std;
+
 using ll = long long;
 
-int n, a[100][100];
-vector<string> step;
-bool found = false;
-string tmp = "";
+int hoare(int a[], int l, int r){
+    int pivot = a[l];
+    int i = l - 1, j = r + 1;
+    while(1){
+        //di tim a[i] >= pivot
+        do{
+            ++i;
+        }while(a[i] < pivot);
+        do{
+            --j;
+        }while(a[j] > pivot);
 
-
-void enter(){
-    cin >> n;
-    for(int i = 1; i <= n; i++){
-        for(int j = 1; j <= n; j++){
-            cin >> a[i][j];
-        }
+        if(i < j)
+            swap(a[i], a[j]);
+        else
+            return j;
     }
+    return -1;
 }
 
-void Try(int i, int j){
-    if(i == n && j == n){
-        found = true;
-        step.push_back(tmp);
-        return;
-    }
-    if(i < n && a[i + 1][j] == 1){
-        a[i + 1][j] = 0;
-        tmp += "D";
-        Try(i + 1, j);
-        tmp.pop_back();
-        a[i + 1][j] = 1;            
-    }
-    if(j < n && a[i][j + 1] == 1){
-        a[i][j + 1] = 0;
-        tmp += "R";
-        Try(i, j + 1);
-        tmp.pop_back();
-        a[i][j + 1] = 1;
-    }
-    if(i > 1 && a[i - 1][j] == 1){
-        a[i - 1][j] = 0;
-        tmp += "U";
-        Try(i - 1, j);
-        tmp.pop_back();
-        a[i - 1][j] = 1;
-    }
-    if(j > 1 && a[i][j - 1] == 1){
-        a[i][j - 1] = 0;
-        tmp += "L";
-        Try(i, j - 1);
-        tmp.pop_back();
-        a[i][j - 1] = 1;
+void quicksort(int a[], int l, int r){
+    if(l < r){
+        int p = hoare(a, l, r);
+        quicksort(a, l, p);
+        quicksort(a, p + 1, r);
     }
 }
 
 int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    enter();
-    Try(1, 1);
-    sort(step.begin(), step.end());
-    if(!found){
-        cout << -1;
-        return 0;
-    }
-    else{
-        for(string x : step){
-            cout << x << endl;
-        }
-        return 0;
+    int a[] = {1, 2, 3, 9, 8, 7, 4, 5, 9, 8, 6};
+    quicksort(a, 0, 10);
+    for(int x : a){
+        cout << x << ' ';
     }
 }

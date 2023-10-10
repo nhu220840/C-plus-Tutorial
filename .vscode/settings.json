@@ -15,7 +15,10 @@
     "regex": "cpp",
     "findtheoldeststudent.h": "c",
     "stdio.h": "c",
-    "random": "cpp"
+    "random": "cpp",
+    "barrier": "cpp",
+    "bitset": "cpp",
+    "memory_resource": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp_Runner.msvcBatchPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvarsall.bat",
@@ -73,5 +76,6 @@
   "C_Cpp_Runner.useUndefinedSanitizer": false,
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
-  "C_Cpp_Runner.useLinkTimeOptimization": false
+  "C_Cpp_Runner.useLinkTimeOptimization": false,
+  "C_Cpp_Runner.msvcSecureNoWarnings": false
 }

@@ -8,12 +8,11 @@ int X[100];
 
 void print(){
     for(int i = 0; i < s.length(); i++){
-        if(isalpha(s[i])) {
-            if(X[i] == 1) cout << char(tolower(s[i]));
-            else cout << char(toupper(s[i]));
-        } else {
-            cout << s[i];
+        if(isalpha(s[i])){
+            if(X[i] == 1) cout << (char)tolower(s[i]);
+            else cout << (char)toupper(s[i]);
         }
+        else cout << s[i];
     }
     cout << endl;
 }

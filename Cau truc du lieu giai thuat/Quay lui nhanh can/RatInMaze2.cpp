@@ -3,12 +3,13 @@
 using namespace std;
 using ll = long long;
 
-int n, a[100][100], visited[100][100];
-vector<string> step;
-string path = "";
+int n, a[100][100];
+bool found = false;
 
-int dx[4] = {-1, 0, 1, 0};
-int dy[4] = {0, -1, 0, 1};
+
+//DLRU: Sap xep tang dan theo thu tu tu dien
+int dx[4] = {1, 0, 0, -1};
+int dy[4] = {0, -1, 1, 0};
 
 void enter(){
     cin >> n;
@@ -19,42 +20,40 @@ void enter(){
     }
 }
 
-void Try(int i, int j){
+char processingStep(int k){
+    string s = "DLRU";
+    return s[k];
+}
+
+void Try(int i, int j, string path){
+    if(i == n && j == n){
+        found = true;
+        cout << path << endl;
+        return;
+    }
     a[i][j] = 0;
     for(int k = 0; k < 4; k++){
         int i1 = i + dx[k];
         int j1 = j + dy[k]; 
-        if(i1 <= n && j1 <= n && a[i1][j1] == 1){
-            if(k == 0) path += "U";
-            if(k == 1) path += "L";
-            if(k == 2) path += "D";
-            if(k == 3) path += "R";
-            if(i1 == n && j1 == n){
-                step.push_back(path);
-            }
-            else{
-                Try(i1, j1);
-            }
+        if(i1 >= 1 && i1 <= n && j1 >= 1 && j1 <= n && a[i1][j1] == 1){
+            // if(k == 0) path += "U";
+            // if(k == 1) path += "L";
+            // if(k == 2) path += "D";
+            // if(k == 3) path += "R";
+            Try(i1, j1, path + processingStep(k));
 
-            path.pop_back();
-            a[i1][j1] = 1;
         }
     }
+    a[i][j] = 1;
 }
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     enter();
-    Try(1, 1);
-    if(step.empty()){
+    string tmp = "";
+    Try(1, 1, tmp);
+    if(!found){
         cout << -1;
-    }
-    else{
-        sort(step.begin(), step.end());
-        for(string x : step){
-            cout << x << endl;
-        }
-        return 0;
     }
 }

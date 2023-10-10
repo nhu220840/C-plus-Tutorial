@@ -1,74 +1,73 @@
 #include <bits/stdc++.h>
+
 using namespace std;
+using ll = long long;
+const int MOD = 1e9 + 7;
 
-int X[14][14];
-int visited[14][14];
-string Duongdi;
-vector<string> v;
-int dx[4] = {0, 1, 0, -1};
-int dy[4] = {1, 0, -1, 0};
+const int MAX_N = 100; // Thay thế giá trị này bằng giới hạn tối đa của n
 
-void BackTrack(int i, int j, int n)
-{
-    visited[i][j] = 1;
-    for (int k = 0; k < 4; k++)
-    {
-        int i1 = i + dx[k];
-        int j1 = j + dy[k];
-        if (!visited[i1][j1] && X[i1][j1] == 1 && i1 <= n && j1 <= n)
-        {
-            if (k == 0)
-            {
-                Duongdi.push_back('R');
+struct matrix{
+    ll A[MAX_N][MAX_N];
+
+    friend matrix operator * (matrix x, matrix y){
+        matrix result;
+        for(int i = 0; i < MAX_N; i++){
+            for(int j = 0; j < MAX_N; j++){
+                result.A[i][j] = 0;
+                for(int k = 0; k < MAX_N; k++){
+                    result.A[i][j] += x.A[i][k] * y.A[k][j];
+                    result.A[i][j] %= MOD;
+                }
             }
-            else if (k == 1)
-            {
-                Duongdi.push_back('D');
-            }
-            else if (k == 2)
-            {
-                Duongdi.push_back('L');
-            }
-            else
-            {
-                Duongdi.push_back('U');
-            }
-            if (i1 == n && j1 == n)
-            {
-                v.push_back(Duongdi);
-            }
-            else
-            {
-                BackTrack(i1, j1, n);
-            }
-            Duongdi.pop_back();
-            visited[i1][j1] = 0;
+        }
+        return result;
+    }
+};
+
+void enterMatrix(matrix &x, int n, int m){
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            cin >> x.A[i][j];
         }
     }
 }
 
-int main()
-{
-    int n;
-    cin >> n;
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= n; j++)
-        {
-            cin >> X[i][j];
+void printMatrix(matrix x, int n, int m){
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            cout << x.A[i][j] << " ";
         }
+        cout << endl;
     }
-    BackTrack(1, 1, n);
-    if (v.empty())
-    {
-        cout << "-1";
+}
+
+matrix myPow(matrix x, ll k, int n){
+    if(k == 1){
+        return x;
     }
+    matrix X = myPow(x, k / 2, n);
+    if(k % 2 == 1)
+        return X * X * x;
     else
-    {
-        sort(v.begin(), v.end());
-        for (auto x : v)
-        {
-            cout << x << "\n";
-        }
-    }
+        return X * X;
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    int n, m; 
+    cin >> n >> m;
+
+    matrix x, y;
+    enterMatrix(x, n, m);
+    enterMatrix(y, n, m);
+
+    matrix res1 = x * y;
+    matrix res2 = (x * x) * (y * y);
+    printMatrix(res1 * res1, n, m);
+    cout << endl;
+    printMatrix(res2, n, m);
+
+    return 0;
 }

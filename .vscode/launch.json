@@ -29,8 +29,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "j:/C plus Tutorial/Mang 1 chieu/Mang cong don, Mang hieu/output",
-      "program": "j:/C plus Tutorial/Mang 1 chieu/Mang cong don, Mang hieu/output/build/Debug/outDebug",
+      "cwd": "j:/C plus Tutorial",
+      "program": "j:/C plus Tutorial/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
