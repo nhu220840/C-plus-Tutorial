@@ -3,27 +3,28 @@
 using namespace std;
 using ll = long long;
 
-string s;
-int X[100];
-
-void print(){
-    for(int i = 0; i < s.length(); i++){
-        if(isalpha(s[i])){
-            if(X[i] == 1) cout << (char)tolower(s[i]);
-            else cout << (char)toupper(s[i]);
-        }
-        else cout << s[i];
-    }
-    cout << endl;
-}
+string s, tmp;
+vector<string> v;
 
 void Try(int i){
-    for(int j = 0; j <= 1; j++){
-        X[i] = j;
-        if(i == s.length() - 1){
-            print();
-        }
-        else Try(i + 1);
+    if(i == s.length()){
+        v.push_back(tmp);
+        return; 
+    }
+
+    if(isdigit(s[i])){
+        tmp.push_back(s[i]);
+        Try(i + 1);
+        tmp.pop_back();
+    }
+    else{
+        tmp.push_back(toupper(s[i]));
+        Try(i + 1);
+        tmp.pop_back();
+
+        tmp.push_back(tolower(s[i]));
+        Try(i + 1);
+        tmp.pop_back();
     }
 }
 
@@ -32,4 +33,6 @@ int main(){
     cin.tie(nullptr);
     cin >> s;
     Try(0);
+    sort(v.begin(), v.end());
+    for(string x : v) cout << x << endl;
 }
