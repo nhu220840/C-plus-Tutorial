@@ -3,7 +3,7 @@
 using namespace std;
 using ll = long long;
 
-ll a[1005][1005], trans[1005][1005], path[1005][1005];
+ll a[1005][1005], path[1005][1005];
 int n;
 
 int main(){
@@ -12,13 +12,7 @@ int main(){
     cin >> n;
     for(int i = 1; i <= n; i++){
         for(int j = 1; j <= n; j++){
-            cin >> trans[i][j];
-        }
-    }
-
-    for(int i = 1; i <= n; i++){
-        for(int j = 1; j <= n; j++){
-            a[i][j] = trans[j][i];
+            cin >> a[i][j];
         }
     }
 

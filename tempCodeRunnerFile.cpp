@@ -3,34 +3,28 @@
 using namespace std;
 using ll = long long;
 
-string s;
-int X[100];
+#define pii pair<int, int>
 
-void print(){
-    for(int i = 0; i < s.length(); i++){
-        if(isalpha(s[i])) {
-            if(X[i] == 1) cout << char(tolower(s[i]));
-            else cout << char(toupper(s[i]));
-        } else {
-            cout << s[i];
-        }
-    }
-    cout << endl;
+bool cmp(pii a, pii b) {
+    if (a.second != b.second)
+        return a.second < b.second;
+    return a.first < b.first;
 }
 
-void Try(int i){
-    for(int j = 0; j <= 1; j++){
-        X[i] = j;
-        if(i == s.length() - 1){
-            print();
-        }
-        else Try(i + 1);
-    }
-}
-
-int main(){
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    cin >> s;
-    Try(0);
+    int n;
+    cin >> n;
+    vector<pair<int, pii>> serve;
+    for (int i = 1; i <= n; i++) {
+        int order, prep;
+        cin >> order >> prep;
+        serve.push_back({i, {order, prep + order}});
+    }
+    sort(serve.begin(), serve.end(), cmp);
+
+    for (auto it : serve) {
+        cout << it.first << " " << it.second.second << endl;
+    }
 }
