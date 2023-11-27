@@ -3,10 +3,36 @@
 using namespace std;
 using ll = long long;
 
+int maxN = 1000000;
+int q[1000000];
+int size = 0;
+
 int n, m, s;
-vector<int> adj[100];
-queue<int> q;
+string adj[100];
 bool visited[100];
+
+bool empty(){
+    return size == 0;
+}
+
+void push(int x){
+    if(size == maxN) return;
+    q[size] = x;
+    size++;
+}
+
+void pop(){
+    if(size == 0) return;
+    for(int i = 0; i < size - 1; i++){
+        q[i] = q[i + 1];
+    }
+    size--;
+}
+
+int front(){
+    return q[0];
+}
+
 
 void enter(){
     cin >> n >> m >> s;
@@ -22,20 +48,21 @@ void enter(){
 }
 
 void BFS(int u){
-    q.push(u);
+    push(u);
     visited[u] = true;
 
-    while(!q.empty()){
-        int x = q.front(); q.pop();
+    while(!empty()){
+        int x = front(); pop();
         cout << x << " ";
         for(int y : adj[x]){
             if(!visited[y]){
-                q.push(y);
+                push(y);
                 visited[y] = true;
             }
         }
     }
 }
+
 
 int main(){
     ios::sync_with_stdio(false);

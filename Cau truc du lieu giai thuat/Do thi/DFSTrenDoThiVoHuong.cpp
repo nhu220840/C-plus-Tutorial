@@ -4,9 +4,8 @@ using namespace std;
 using ll = long long;
 
 int n, m, s;
-vector<int> adj[100];
-queue<int> q;
-bool visited[100];
+vector<int> adj[1001];
+bool visited[1001];
 
 void enter(){
     cin >> n >> m >> s;
@@ -21,18 +20,13 @@ void enter(){
     }
 }
 
-void BFS(int u){
-    q.push(u);
+void DFS(int u){
+    cout << u << " ";
     visited[u] = true;
 
-    while(!q.empty()){
-        int x = q.front(); q.pop();
-        cout << x << " ";
-        for(int y : adj[x]){
-            if(!visited[y]){
-                q.push(y);
-                visited[y] = true;
-            }
+    for(int x : adj[u]){
+        if(!visited[x]){
+            DFS(x);
         }
     }
 }
@@ -41,5 +35,5 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     enter();
-    BFS(s);
+    DFS(s);
 }

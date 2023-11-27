@@ -1,30 +1,37 @@
 #include <bits/stdc++.h>
-
+#define ll long long
+#define ii pair<int, int>
 using namespace std;
-using ll = long long;
+ll MOD = 1e9 + 7;
 
-#define pii pair<int, int>
-
-bool cmp(pii a, pii b) {
-    if (a.second != b.second)
-        return a.second < b.second;
-    return a.first < b.first;
+bool recursion(ll num, ll a, ll b)
+{
+    ll x = (ll)(pow(a, 3) + pow(b, 3));
+    if (num == x)
+        return true;
+    if (num < x)
+        return false;
+    return recursion(num, ++a, ++b);
 }
 
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+int main()
+{
     int n;
     cin >> n;
-    vector<pair<int, pii>> serve;
-    for (int i = 1; i <= n; i++) {
-        int order, prep;
-        cin >> order >> prep;
-        serve.push_back({i, {order, prep + order}});
+    ll a[n];
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> a[i];
     }
-    sort(serve.begin(), serve.end(), cmp);
+    for (ll i = 0; i < n; i++)
+    {
+        if (!recursion(a[i], 0, 1))
+        {
+            cout << "NO";
+            return 0;
+        }
+    }
+    cout << "YES";
 
-    for (auto it : serve) {
-        cout << it.first << " " << it.second.second << endl;
-    }
+    return 0;
 }
