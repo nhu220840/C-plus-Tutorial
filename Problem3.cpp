@@ -1,25 +1,40 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-using ll = long long;
 
-void bubbleSort(int a[], int n){
-    int maximum = a[n - 1], minimum = a[0]; 
-    for(int i = 0; i < n - 1; i++){
-        for(int j = 0; j < n - i - 1; j++){
-            if(a[j] > a[j + 1]){
-                swap(a[j], a[j + 1]);
+void optimizedBubbleSort(int a[], int n){
+    int left = 0, right = n - 1;
+    
+    while(left < right){
+        bool swapped = false;
+        for(int i = left; i < right; i++){
+            if(a[i] > a[i + 1]){
+                swap(a[i], a[i + 1]);
+                swapped = true;
             }
         }
+        
+        if(!swapped) break;
+        
+        right--;
+        
+        for(int i = right; i > left; i--){
+            if(a[i] < a[i - 1]){
+                swap(a[i], a[i - 1]);
+                swapped = true;
+            }
+        }
+        
+        if(!swapped) break;
+        
+        left++;
     }
 }
 
 int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
     int n; cin >> n;
     int a[n];
     for(int &x : a) cin >> x;
-    bubbleSort(a, n);
+    optimizedBubbleSort(a, n);
     for(int x : a) cout << x << " ";
 }
