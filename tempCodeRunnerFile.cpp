@@ -1,37 +1,61 @@
 #include <bits/stdc++.h>
 #define ll long long
-#define ii pair<int, int>
 using namespace std;
 ll MOD = 1e9 + 7;
+int visited[10001];
+int parent[10001];
+bool check = false;
 
-bool recursion(ll num, ll a, ll b)
+void DFS(int x, set<int> adj[])
 {
-    ll x = (ll)(pow(a, 3) + pow(b, 3));
-    if (num == x)
-        return true;
-    if (num < x)
-        return false;
-    return recursion(num, ++a, ++b);
+    visited[x] = 1;
+    for (auto v : adj[x])
+    {
+        if (!visited[v])
+        {
+            parent[v] = x;
+            DFS(v, adj);
+        }
+        else
+        {
+            if (parent[x] != v && visited[v] == 1)
+            {
+                check = true;
+            }
+        }
+    }
+    visited[x]=2;
 }
 
 int main()
 {
-    int n;
-    cin >> n;
-    ll a[n];
-    for (ll i = 0; i < n; i++)
+    // ios_base::sync_with_stdio(NULL);
+    // cin.tie(0);
+    // cout.tie(0);
+    set<int> adj[10001];
+    int n, m;
+    cin >> n >> m;
+    for (int i = 1; i <= m; i++)
     {
-        cin >> a[i];
+        int x, y;
+        cin >> x >> y;
+        adj[x].insert(y);
     }
-    for (ll i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
     {
-        if (!recursion(a[i], 0, 1))
+        if (!visited[i])
         {
-            cout << "NO";
-            return 0;
+            DFS(i, adj);
         }
     }
-    cout << "YES";
+    if (check)
+    {
+        cout << 1 << endl;
+    }
+    else
+    {
+        cout << 0 << endl;
+    }
 
     return 0;
 }
