@@ -14,7 +14,6 @@ void enter(){
     for(int i = 1; i <= m; i++){
         int u, v; cin >> u >> v;
         adj[u].push_back(v);
-        adj[v].push_back(u);
     }
 
     for(int i = 1; i <= n; i++){
@@ -44,7 +43,7 @@ int main(){
             t = parent[t];
         }
         path.push_back(s);
-
+        
         reverse(path.begin(), path.end());
         for(int x : path) cout << x << " ";
     }

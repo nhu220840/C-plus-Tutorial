@@ -3,18 +3,17 @@
 using namespace std;
 using ll = long long;
 
-int n, m, s, t;
+int n, m, s;
 vector<int> adj[1001];
 bool visited[1001];
-int parent[1001];
 
 void enter(){
-    cin >> n >> m >> s >> t;
+    cin >> n >> m >> s;
 
     for(int i = 1; i <= m; i++){
         int u, v; cin >> u >> v;
         adj[u].push_back(v);
-        adj[v].push_back(u);
+        adj[v].push_back(u); //co huong thi bo dong nay
     }
 
     for(int i = 1; i <= n; i++){
@@ -22,11 +21,12 @@ void enter(){
     }
 }
 
-void DFS(int s){
-    visited[s] = true;
-    for(int x : adj[s]){
+void DFS(int u){
+    cout << u << " ";
+    visited[u] = true;
+
+    for(int x : adj[u]){
         if(!visited[x]){
-            parent[x] = s;
             DFS(x);
         }
     }
@@ -37,16 +37,4 @@ int main(){
     cin.tie(nullptr);
     enter();
     DFS(s);
-    if(visited[t] == true){
-        vector<int> path;
-        while(t != s){
-            path.push_back(t);
-            t = parent[t];
-        }
-        path.push_back(s);
-
-        reverse(path.begin(), path.end());
-        for(int x : path) cout << x << " ";
-    }
-    else cout << -1;
 }

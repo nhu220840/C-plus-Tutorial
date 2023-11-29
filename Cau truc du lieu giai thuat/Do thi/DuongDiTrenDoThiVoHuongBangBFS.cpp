@@ -22,12 +22,19 @@ void enter(){
     }
 }
 
-void DFS(int s){
-    visited[s] = true;
-    for(int x : adj[s]){
-        if(!visited[x]){
-            parent[x] = s;
-            DFS(x);
+void BFS(int u){
+    queue<int> q;
+    q.push(u);
+    visited[u] = true;
+
+    while(!q.empty()){
+        int top = q.front(); q.pop();
+        for(int v : adj[top]){
+            if(!visited[v]){
+                q.push(v);
+                visited[v] = true;
+                parent[v] = top;
+            }
         }
     }
 }
@@ -36,17 +43,18 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     enter();
-    DFS(s);
-    if(visited[t] == true){
+    BFS(s);
+    if(!visited[t]) cout << -1;
+    else{
         vector<int> path;
+
         while(t != s){
             path.push_back(t);
             t = parent[t];
         }
         path.push_back(s);
-
         reverse(path.begin(), path.end());
+
         for(int x : path) cout << x << " ";
     }
-    else cout << -1;
 }
