@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "ditmemay",
+      "request": "launch",
+      "mainClass": "ditmemay",
+      "projectName": "C plus Tutorial_3c4af748"
+    },
+    {
       "name": "C/C++: g++.exe build and debug active file",
       "type": "cppdbg",
       "request": "launch",

@@ -6,6 +6,13 @@ using ll = long long;
 //Chi su dung duoc neu do thi khong co chu trinh (DAG - Directed Acyclic Graph)
 //Thuat toan Kahn la 1 cach sap xep khac cua topological sorting
 
+//Idea: 
+//-tinh ban bac vao cua cac dinh 
+//-Dinh nao co ban bac vao = 0 chung to la dinh bat dau
+//-Khi do, day dinh do vao trong hang doi, dong thoi giam ban bac vao cua cac dinh ke voi no
+//-Neu co dinh nao co ban bac vao = 0 lai day tiep vao hang doi
+//-Tiep tuc nhung thao tac do cho den khi het cac dinh trong hang doi
+
 int n, m;
 vector<int> adj[1001];
 bool visited[1001];
