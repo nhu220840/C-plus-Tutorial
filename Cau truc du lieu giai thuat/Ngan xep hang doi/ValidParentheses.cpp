@@ -19,7 +19,7 @@ bool checkParentheses(string s){
             else st.pop();
         }
     }
-    return true;
+    return st.empty();
 }
 
 int main(){
