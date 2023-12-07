@@ -11,7 +11,7 @@ bool solve(string s){
             int j = st.top(); st.pop();
             //(a): true
             //(x + y): true
-            //if(i - j == 2 || if(s[j]))
+            if(i - j == 2 || if(s[j]))
         }
     }
 }
