@@ -9,15 +9,19 @@ int main(){
     string s; cin >> s;
     stack<char> st;
     for(int i = 0; i < s.length(); i++){
-        if(st.empty() || st.top() != s[i]) st.push(s[i]);
-        else{
-            if(st.empty()){ 
-                cout << "EMPTY"; 
-                return 0;
-            }
-            else st.pop();
+        if(!st.empty() && s[i] == st.top()){
+            st.pop();
         }
+        else st.push(s[i]);
     }
-    cout << s;
-    return 0;
+    if(st.empty()){
+        cout << "EMPTY";
+        return 0;
+    }
+    vector<char> v;
+    while(!st.empty()){
+        v.push_back(st.top()); st.pop();
+    }
+    reverse(v.begin(), v.end());
+    for(char x : v) cout << x;
 }
