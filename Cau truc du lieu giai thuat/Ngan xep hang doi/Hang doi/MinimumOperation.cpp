@@ -3,12 +3,13 @@
 using namespace std;
 using ll = long long;
 using ii = pair<int, int>;
+bool visited[1001];
 
 int bfs(int s, int t){
     set<int> se; //luu trang thai cua cac so da dung roi (tuong tu nhu mang visited)
     queue<ii> q; //first: trang thai hien tai, second: so thao tac
     q.push({s, 0});
-    se.insert(s);
+    visited[s] = true;
     
     while(!q.empty()){
         ii top = q.front(); q.pop();
@@ -16,13 +17,13 @@ int bfs(int s, int t){
             return top.second;
         int x = top.first, y = top.second;
 
-        if(x - 1 >= 1 && !se.count(x - 1)){
+        if(x - 1 >= 1 && !visited[x - 1]){
             q.push({x - 1, y + 1});
-            se.insert(x - 1);
+            visited[x - 1] = true;
         }
-        if(!se.count(x * 2)){
+        if(!visited[x * 2]){
             q.push({x * 2, y + 1});
-            se.insert(x * 2);
+            visited[x * 2] = true;
         }
     }
     return -1;
