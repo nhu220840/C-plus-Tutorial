@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <math.h>
-int cal(int a, int b){
 
- int res = 2 * a + 3 * b;
- return res;
+long long cal(int a, int b){
+ return a * b;
 }
 int main(){
- printf("%.2f", (float)cal(10.2, 2.1));
- return 0;
+ printf("%lld", cal(1000000.5, 10000000.2));
 }
